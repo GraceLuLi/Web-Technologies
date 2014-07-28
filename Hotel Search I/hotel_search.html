@@ -1,0 +1,32 @@
+<html>
+<head>
+<title>hotel search</title>
+<script language="JavaScript">
+function check(){
+var city = document.getElementById("city").value;
+     if(city==""){
+      alert("Please enter a city name");
+     }
+}
+</script>
+</head>
+
+<body><center>
+<form name="hotel_search" method="post" action="../cgi-bin/search.pl" >
+<h><font size="7">Hotel Search</font></h><br>
+<table border="2" width=500 length=500><tr><td><br><br>
+City: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+<input type="text" name="city" id="city" style= "width:250px;height:25px"><br><br>
+Hotel chain: <select name="hotel" id="hotel" style= "width:250px;height:25px">
+<option value="Hilton">Hilton
+<option value="Marriott">Marriott
+<option value="Accor">Accor
+<option value="Hyatt">Hyatt
+<option value="InterContinental">InterContinental
+</select><br><br><center>
+<input type="submit" value="Search" onSubmit="check()" style= "width:100px;height:25px">
+</center>
+</form>
+</tr></td></table>
+</center></body>
+</html>

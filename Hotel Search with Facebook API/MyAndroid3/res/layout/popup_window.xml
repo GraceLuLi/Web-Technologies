@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:gravity="top" >
+
+    <TextView
+        android:id="@+id/popUpHotelname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp" />
+
+    <ImageView
+        android:id="@+id/popUpImage"
+        android:layout_width="120dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/popUpHotelname"
+        android:src="@drawable/icon" />
+    
+
+    <TextView
+        android:id="@+id/popUpReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_below="@+id/popUpImage"
+        android:layout_marginTop="25dp" />
+
+    <TextView
+        android:id="@+id/popUpRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="25dp"
+        android:layout_below="@+id/popUpReview"
+        android:text="Rating:" />
+
+    <RatingBar
+        android:id="@+id/popUpStars"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"     
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp" 
+        android:layout_below="@+id/popUpRating" />
+      
+
+    <Button
+        android:id="@+id/popUpPostbutton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/popUpStars"
+        android:text="Post to Facebook" />
+
+</RelativeLayout>

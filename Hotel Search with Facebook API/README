@@ -1,0 +1,18 @@
+#Name: Lu Li
+#ClassID: 19595
+#USCID: 4264118672
+#MyWebsite: http://www-scf.usc.edu/~lli619/lulihomework.html
+
+1.Type in the city name and choose hotel, click Search button, it will show the relative hotels list
+2. Click the the hotel shown on the hotelist,it will pop up an window, allow the facebook post
+3.When type in wrong city name, it will show an error message
+4.When type in nothing, but click search button, it will show an message to let you type in city name
+5. Some of the code come from the internet, here are their links:
+post to Facebook:
+http://stackoverflow.com/questions/5170355/android-send-a-facebook-post-with-custom-actions
+listview:
+http://www.eoeandroid.com/forum.php?mod=viewthread&tid=155265
+some other references come from google search results, and I can not find out their links, sorry.
+
+
+

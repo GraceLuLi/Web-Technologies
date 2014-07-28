@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Facebook SDK Example</string>
+    <string name="request">Request!</string>
+    <string name="hello">Choose a hotel chain and Input the city name</string>
+    <string name="upload">Upload Photo</string><string name="post">Wall Post!</string>
+    <string name="delete">Delete Post</string>
+    <string name="login">You have logged in!</string>
+    <string name="hotels_prompt">Choose a hotel</string>
+    <string-array name="hotels_array">
+        <item>Hilton</item>
+        <item>Marriott</item>
+        <item>Accor</item>
+        <item>Hyatt</item>
+        <item>InterContinental</item>
+    </string-array>
+    
+
+</resources>

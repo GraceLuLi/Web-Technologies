@@ -1,0 +1,162 @@
+<html>
+<head>
+<title>hotel search</title>
+<script language="JavaScript">
+var req = false;
+
+function clickCheck() {
+	document.getElementById("results").innerHTML = "";
+	var url = "http://cs-server.usc.edu:19596/examples/servlet/ajax_hotel?";
+	if (check()) {
+		var cityname = form.city.value;
+		cityname = cityname.replace(/\ /g,"+");
+		//alert(cityname);
+		url += "city=" + cityname + "&hotel=" + form.hotel.value;
+		loadXMLDoc(url);
+	} 
+}
+
+function loadXMLDoc(url) {
+	if (window.XMLHttpRequest) {
+	// branch for native XMLHttpRequest object
+		try {
+			req = new XMLHttpRequest;
+		} catch (e) {
+			req = false;
+		}
+	} else if (window.ActiveXObject) {
+	// branch for IE/Windows ActiveX version
+		try {
+			req = new ActiveXObject("Msxml2.XMLHTTP");
+		} catch (e) {
+			try {
+				req = new ActiveXObject("Microsoft.XMLHTTP");
+			} catch (e) {
+				req = false;
+			}
+		}
+	}
+	if (req) {
+		req.open("GET", url, true);
+		req.onreadystatechange = myCallback;
+		req.setRequestHeader("Connection", "Close");
+		req.setRequestHeader("Method", "GET" + url + "HTTP/1.1");
+		req.send();
+	} else{
+		document.getElementById("results").innerHTML = "Cannot create XMLHttpRequest!";
+	}
+}
+
+
+
+function myCallback(){
+        if (req.readyState == 4){
+         if( req.status == 200){
+          var text = eval('(' + req.responseText + ')');
+          var size = text.hotels.hotel.length;
+          if(size!=0){
+          //var replystr = "<br><br><table border='1' text-align = center><tr><td>Image</td><td>Name</td><td>Location</td><td>Rating out of 5</td><td>Reviews</td><td>Post to Facebook</td><tr>";
+         var replystr = "<br><br><table border='1' text-align = center><tr><td>hotel</td><td>Location</td><td>Rating out of 5</td><td>Reviews</td><td>Post to Facebook</td><tr>";
+
+         for(var i=0; i<size; i++){
+          replystr += "<tr><td><img width=\"100\" length=\"100\" height=\"100\" src=\""+ text.hotels.hotel[i].image_url +"\"></td>";
+          //replystr += "<td>"+ text.hotels.hotel[i].name +"</td>";
+          replystr += "<td>"+ text.hotels.hotel[i].location +"</td>";
+          replystr += "<td>"+ text.hotels.hotel[i].no_of_stars +"</td>";
+          replystr += "<td><a href=\""+text.hotels.hotel[i].review_url +"\">";
+          replystr += text.hotels.hotel[i].no_of_reviews+"</a></td>";
+          replystr += "<td><img src=\"Facebook.gif\" alt=\"Image\" width=\"80\" height=\"100\" onclick=\"postToFeed(" + i + ")\"></td></tr>";
+          }
+          replystr +="</table>";
+		  document.getElementById("results").innerHTML = replystr;
+	    } 
+	    else{
+		  document.getElementById("results").innerHTML = "No Hotels Found!" ;		  
+	      }
+	  }
+	  else{
+		  document.getElementById("results").innerHTML = "Error !" ;		  
+	      }
+	}
+}
+
+
+function check(){
+	if(city.value == ""){
+		alert("Please enter a city name.");
+		city.focus();
+		return false;
+	}
+	return true;
+}
+
+</script>
+</head>
+
+<body><center>
+<form name="form" method="post">
+<h><font size="7">Hotel Search</font></h><br>
+<table border="2" width=500 length=500><tr><td><br><br>
+City: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+<input type="text" name="city" id="city" style= "width:250px;height:25px"><br><br>
+Hotel chain: <select name="hotel" id="hotel" style= "width:250px;height:25px">
+<option value="Hilton">Hilton
+<option value="Marriott">Marriott
+<option value="Accor">Accor
+<option value="Hyatt">Hyatt
+<option value="InterContinental">InterContinental
+</select><br><br><center>
+<input type="button" value="Search" onClick="clickCheck()" style= "width:100px;height:25px">
+</center>
+</form>
+</tr></td></table>
+<div id= "results"></div>
+
+<div id="fb-root"></div>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '297263870342079', // App ID
+      status     : true, // check login status
+      cookie     : true, // enable cookies to allow the server to access the session
+      xfbml      : true  // parse XFBML
+    });
+
+    // Additional initialization code here
+  };
+
+  // Load the SDK Asynchronously
+  (function(d){
+     var js, id = 'facebook-jssdk', ref = d.getElementsByTagName('script')[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement('script'); js.id = id; js.async = true;
+     js.src = "//connect.facebook.net/en_US/all.js";
+     ref.parentNode.insertBefore(js, ref);
+   }(document));
+</script>
+
+<script> 
+      function postToFeed(i) {
+		 var text = eval('(' + req.responseText + ')');
+        // calling the API ...
+        var obj = {
+         method: 'feed',
+          link: text.hotels.hotel[i].review_url,
+          picture:text.hotels.hotel[i].image_url,
+          name: text.hotels.hotel[i].name,
+          caption: 'Check this hotel',
+          description: 'The hotel located at ' + text.hotels.hotel[i].location + ' and has a rating of ' + text.hotels.hotel[i].no_of_stars,
+		  properties:{'Find the Hotel Reviews':{'text':'here', 'href': text.hotels.hotel[i].review_url }}
+        };
+
+        function callback(response) {
+          alert("Posted !");
+        }
+
+        FB.ui(obj, callback);
+      }
+    
+    </script>
+
+</center></body>
+</html>
